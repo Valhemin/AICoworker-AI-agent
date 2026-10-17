@@ -1,0 +1,11 @@
+.DS_Store
+node_modules/
+.env
+.env.*
+sources/
+archive/
+shared/08_Downloads-Quarantine/**
+!shared/08_Downloads-Quarantine/.gitkeep
+*.pem
+*.key
+openclaw.json

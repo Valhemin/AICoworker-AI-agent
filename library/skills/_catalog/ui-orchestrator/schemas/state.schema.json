@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UIOrchestrator State",
+  "type": "object",
+  "properties": {
+    "schemaVersion": { "type": "string", "description": "State schema version (semver)" },
+    "projectName": { "type": "string" },
+    "projectRoot": { "type": "string", "description": "Absolute path to project root" },
+    "mode": {
+      "type": "string",
+      "enum": ["new", "existing"],
+      "default": "new",
+      "description": "new = build from scratch; existing = audit + targeted fix"
+    },
+    "productContextDone": { "type": "boolean", "default": false },
+    "designApproved": { "type": "boolean", "default": false },
+    "auditDone": { "type": "boolean", "default": false },
+    "autonomousMode": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, skip confirmation gates — agent auto-selects scope and approves design lock"
+    },
+    "auditScope": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Approved fix scope for existing project mode",
+      "examples": ["fix-a11y", "fix-token-drift", "taste-overlay", "fix-responsive", "full-redesign", "fix-ux-flow", "fix-empty-states", "fix-error-states", "fix-cognitive-load", "fix-consistency"]
+    },
+    "tasteMode": {
+      "type": "string",
+      "enum": ["off", "constrained", "full"],
+      "default": "constrained"
+    },
+    "dials": {
+      "type": "object",
+      "properties": {
+        "DESIGN_VARIANCE": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "MOTION_INTENSITY": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "VISUAL_DENSITY": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "source": {
+          "type": "string",
+          "enum": ["user", "design.md", "preset", "inferred", "default"],
+          "description": "Which priority level resolved the dials"
+        }
+      },
+      "required": ["DESIGN_VARIANCE", "MOTION_INTENSITY", "VISUAL_DENSITY"]
+    },
+    "phases": {
+      "type": "object",
+      "properties": {
+        "preflight":       { "$ref": "#/definitions/phaseRecord" },
+        "extractDesign":   { "$ref": "#/definitions/phaseRecord" },
+        "auditExisting":   { "$ref": "#/definitions/phaseRecord" },
+        "auditScope":      { "$ref": "#/definitions/phaseRecord" },
+        "productContext":  { "$ref": "#/definitions/phaseRecord" },
+        "resolveDials":    { "$ref": "#/definitions/phaseRecord" },
+        "uiproRun":        { "$ref": "#/definitions/phaseRecord" },
+        "bridge":          { "$ref": "#/definitions/phaseRecord" },
+        "designLock":      { "$ref": "#/definitions/phaseRecord" },
+        "implement":       { "$ref": "#/definitions/phaseRecord" },
+        "taste":           { "$ref": "#/definitions/phaseRecord" },
+        "qa":              { "$ref": "#/definitions/phaseRecord" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "uiproVersion":    { "type": "string" },
+        "impeccableVersion": { "type": "string" },
+        "tasteVersion":    { "type": "string" },
+        "inputHash":       { "type": "string", "description": "sha256 of uipro-output.json" },
+        "designHash":      { "type": "string", "description": "sha256 of DESIGN.md at lock time" },
+        "bridgeVersion":   { "type": "string" },
+        "lastUpdated":     { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "required": ["schemaVersion", "projectName", "productContextDone", "designApproved"],
+  "definitions": {
+    "phaseRecord": {
+      "type": "object",
+      "properties": {
+        "status": { "type": "string", "enum": ["pending", "running", "done", "skipped", "failed"] },
+        "completedAt": { "type": "string", "format": "date-time" },
+        "skippedReason": { "type": "string" }
+      },
+      "required": ["status"]
+    }
+  }
+}

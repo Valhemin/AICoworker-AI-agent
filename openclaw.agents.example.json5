@@ -1,0 +1,484 @@
+// Schema của AICoworker đang cài: agents.list, không phải agents.entries.
+// Model để trống: agent dùng model mặc định trong ~/.openclaw/openclaw.json.
+// skills là allowlist. Phiên chính chỉ thấy mô tả của các skill này.
+// extraDirs là thư mục cha, một cấp, vì app chỉ quét <dir>/<skill>/SKILL.md.
+// Không ghi API key.
+
+{
+  mcp: {
+    servers: {
+      rea: {
+        command: "npx",
+        args: [
+          "-y",
+          "rea-agents@6.5.0",
+          "--mcp"
+        ],
+        enabled: true
+      }
+    }
+  },
+  skills: {
+    load: {
+      extraDirs: [
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/_catalog",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/_shared",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/analyst",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/application",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/architect",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/browser",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/ceo",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/creator",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/creator-publish",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/creator-research",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/creator-story",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/creator-visual",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/debug",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/designer",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/developer-personal",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/developer-work",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/implement",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/marketer",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/office",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/rea",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/reviewer",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/sales",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/support",
+        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/tester"
+      ],
+      watch: true
+    }
+  },
+  agents: {
+    list: [
+      {
+        id: "ceo",
+        name: "ceo",
+        default: true,
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/ceo",
+        skills: [
+          "route-work",
+          "work-plan",
+          "market-choice",
+          "release-to-users",
+          "release-readiness",
+          "founder-next-moves",
+          "founder-sop"
+        ],
+        subagents: {
+          allowAgents: [
+            "analyst",
+            "architect",
+            "designer",
+            "implement",
+            "reviewer",
+            "tester",
+            "debug",
+            "rea",
+            "marketer",
+            "sales",
+            "support",
+            "browser",
+            "office",
+            "application",
+            "creator",
+            "creator-research",
+            "creator-story",
+            "creator-visual",
+            "creator-publish",
+            "developer-work",
+            "developer-personal"
+          ]
+        }
+      },
+      {
+        id: "analyst",
+        name: "analyst",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/analyst",
+        skills: [
+          "idea-fit"
+        ],
+        subagents: {
+          allowAgents: [
+            "browser",
+            "creator-research"
+          ]
+        }
+      },
+      {
+        id: "marketer",
+        name: "marketer",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/marketer",
+        skills: [
+          "brand-profile",
+          "audience-channel",
+          "launch-sprint",
+          "content-calendar",
+          "competitor-watch"
+        ],
+        subagents: {
+          allowAgents: [
+            "browser",
+            "creator",
+            "creator-research",
+            "designer"
+          ]
+        }
+      },
+      {
+        id: "support",
+        name: "support",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/support",
+        skills: [
+          "customer-issue",
+          "user-faq"
+        ],
+        subagents: {
+          allowAgents: [
+            "architect",
+            "creator"
+          ]
+        }
+      },
+      {
+        id: "rea",
+        name: "rea",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/rea",
+        skills: [
+          "rea-investigate"
+        ],
+        subagents: {
+          allowAgents: []
+        }
+      },
+      {
+        id: "developer-work",
+        name: "developer-work",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/developer-work",
+        skills: [
+          "company-task"
+        ],
+        subagents: {
+          allowAgents: [
+            "architect",
+            "implement",
+            "reviewer",
+            "debug",
+            "tester",
+            "rea"
+          ]
+        }
+      },
+      {
+        id: "developer-personal",
+        name: "developer-personal",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/developer-personal",
+        skills: [
+          "personal-task",
+          "search-first",
+          "feature-implementation",
+          "tasks-md-execution",
+          "tdd-red-green-refactor",
+          "research-before-implement",
+          "root-cause-debugging",
+          "regression-test-design",
+          "build-fix-loop",
+          "verify-change",
+          "work-plan",
+          "security-threat-model",
+          "mcp-server-build",
+          "mcp-connect",
+          "follow-design",
+          "web-seo",
+          "command-risk",
+          "code-structure"
+        ],
+        subagents: {
+          allowAgents: [
+            "architect",
+            "implement",
+            "reviewer",
+            "debug",
+            "tester",
+            "rea"
+          ]
+        }
+      },
+      {
+        id: "architect",
+        name: "architect",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/architect",
+        skills: [
+          "new-project-discovery",
+          "product-requirements",
+          "technical-architecture",
+          "writing-plans-superpowers",
+          "lead-decomposition",
+          "spec-consistency-analysis",
+          "stack-selection",
+          "work-plan"
+        ],
+        subagents: {
+          allowAgents: [
+            "designer",
+            "implement",
+            "debug",
+            "tester"
+          ]
+        }
+      },
+      {
+        id: "designer",
+        name: "designer",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/designer",
+        skills: [
+          "design-direction",
+          "ui-ux-spec",
+          "product-brand",
+          "design-check"
+        ],
+        subagents: {
+          allowAgents: []
+        }
+      },
+      {
+        id: "implement",
+        name: "implement",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/implement",
+        skills: [
+          "feature-implementation",
+          "tasks-md-execution",
+          "search-first",
+          "research-before-implement",
+          "test-strategy",
+          "build-fix-loop",
+          "incremental-self-review",
+          "verify-change",
+          "follow-design",
+          "web-seo",
+          "mcp-server-build",
+          "mcp-connect",
+          "work-plan",
+          "security-threat-model",
+          "command-risk",
+          "code-structure"
+        ],
+        subagents: {
+          allowAgents: [
+            "reviewer",
+            "debug",
+            "tester"
+          ]
+        }
+      },
+      {
+        id: "reviewer",
+        name: "reviewer",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/reviewer",
+        skills: [
+          "independent-review",
+          "command-risk"
+        ],
+        subagents: {
+          allowAgents: [
+            "implement",
+            "tester"
+          ]
+        }
+      },
+      {
+        id: "sales",
+        name: "sales",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/sales",
+        skills: [
+          "sales-context",
+          "value-prop",
+          "discovery-prep",
+          "objection-handling",
+          "deal-brief",
+          "deal-close",
+          "win-loss"
+        ],
+        subagents: {
+          allowAgents: [
+            "browser",
+            "marketer"
+          ]
+        }
+      },
+      {
+        id: "tester",
+        name: "tester",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/tester",
+        skills: [
+          "product-test",
+          "qa-plan",
+          "qa-edge",
+          "qa-write",
+          "qa-pom",
+          "qa-desktop",
+          "qa-run",
+          "qa-figma",
+          "qa-bug",
+          "qa-cleanup",
+          "qa-release-check"
+        ],
+        subagents: {
+          allowAgents: []
+        }
+      },
+      {
+        id: "debug",
+        name: "debug",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/debug",
+        skills: [
+          "systematic-debugging-superpowers",
+          "root-cause-debugging",
+          "regression-test-design",
+          "build-fix-loop",
+          "security-threat-model",
+          "command-risk",
+          "code-structure"
+        ],
+        subagents: {
+          allowAgents: []
+        }
+      },
+      {
+        id: "browser",
+        name: "browser",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/browser",
+        skills: [
+          "browser-task"
+        ],
+        subagents: {
+          allowAgents: []
+        }
+      },
+      {
+        id: "office",
+        name: "office",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/office",
+        skills: [
+          "office-task"
+        ],
+        subagents: {
+          allowAgents: []
+        }
+      },
+      {
+        id: "application",
+        name: "application",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/application",
+        skills: [
+          "app-task"
+        ],
+        subagents: {
+          allowAgents: []
+        }
+      },
+      {
+        id: "creator",
+        name: "creator",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/creator",
+        skills: [
+          "creator-orchestrator",
+          "creative-brief",
+          "creative-producer",
+          "content-strategy",
+          "creator-brand-system",
+          "quality-evaluation",
+          "packaging-distribution",
+          "customer-guide",
+          "web-seo"
+        ],
+        subagents: {
+          allowAgents: [
+            "creator-research",
+            "creator-story",
+            "creator-visual",
+            "creator-publish"
+          ]
+        }
+      },
+      {
+        id: "creator-research",
+        name: "creator-research",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/creator-research",
+        skills: [
+          "market-intelligence",
+          "research-fact-verification",
+          "analytics-experimentation",
+          "compliance-rights"
+        ],
+        subagents: {
+          allowAgents: []
+        }
+      },
+      {
+        id: "creator-story",
+        name: "creator-story",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/creator-story",
+        skills: [
+          "concept-development",
+          "story-architecture",
+          "screenwriting",
+          "dialogue-brand-voice",
+          "hook-retention",
+          "character-world-bible",
+          "documentary-narrative",
+          "learning-experience-design",
+          "interactive-narrative-design",
+          "comic-webtoon-design"
+        ],
+        subagents: {
+          allowAgents: []
+        }
+      },
+      {
+        id: "creator-visual",
+        name: "creator-visual",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/creator-visual",
+        skills: [
+          "directing-blocking",
+          "cinematography-shot-design",
+          "production-design",
+          "storyboard-animatic",
+          "image-prompt-engineering",
+          "video-motion-prompt-engineering",
+          "brand-visual",
+          "motion-graphics-vfx-planning",
+          "continuity-supervision",
+          "visual-explanation-design"
+        ],
+        subagents: {
+          allowAgents: []
+        }
+      },
+      {
+        id: "creator-publish",
+        name: "creator-publish",
+        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/creator-publish",
+        skills: [
+          "editing-postproduction",
+          "packaging-distribution",
+          "localization-cultural-adaptation",
+          "voice-sound-direction",
+          "content-repurposing",
+          "live-content-production",
+          "podcast-interview-production",
+          "ai-production-technical-direction",
+          "opencreator-handoff",
+          "opencreator-download",
+          "opencreator-subtitle",
+          "opencreator-voice",
+          "opencreator-render",
+          "opencreator-cover"
+        ],
+        subagents: {
+          allowAgents: []
+        }
+      }
+    ]
+  }
+}
