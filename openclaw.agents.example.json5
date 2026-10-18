@@ -96,6 +96,7 @@
         name: "analyst",
         workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/analyst",
         skills: [
+          "idea-evaluate",
           "idea-fit"
         ],
         subagents: {
@@ -261,13 +262,27 @@
           "work-plan",
           "security-threat-model",
           "command-risk",
-          "code-structure"
+          "code-structure",
+          // platform skills — load the one matching the current project stack
+          "frontend-react",
+          "backend-api",
+          "nextjs-patterns",
+          "electron-desktop",
+          "tdd-red-green-refactor",
+          // dead-reference fixes now resolved
+          "api-integration-workflow",
+          "error-handling-patterns",
+          "api-testing",
+          "db-migration-workflow",
+          "env-config-management",
+          "observability-setup"
         ],
         subagents: {
           allowAgents: [
             "reviewer",
             "debug",
-            "tester"
+            "tester",
+            "browser"
           ]
         }
       },

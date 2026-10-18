@@ -32,6 +32,7 @@ This skill coordinates the following skills — invoke them at the indicated ste
 | `api-testing` | DEFAULT after any backend/API implementation — happy path + edge cases |
 | `db-migration-workflow` | When the feature requires schema changes |
 | `env-config-management` | When new env vars, secrets, or feature flags are introduced |
+| `observability-setup` | When starting a new service, or when logger/health check/error tracker is not yet present |
 | `tdd-red-green-refactor` | When test infrastructure exists and the logic is non-trivial |
 | `incremental-self-review` | After each scope before moving to the next |
 | `verification-before-completion` | Before final completion report |

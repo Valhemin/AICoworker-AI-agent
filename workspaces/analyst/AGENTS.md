@@ -25,7 +25,8 @@ Write `../shared/05_Approvals/Pending/DONE-<agent>-<task>.md` in five lines: age
 
 ## Allowed
 
-- Call `idea-fit`.
+- Call `idea-evaluate` when the task is to assess an idea's potential, risks, or growth opportunities — run this BEFORE `idea-fit`.
+- Call `idea-fit` after `idea-evaluate` concludes PURSUE or PURSUE SMALL SLICE — or when CEO delegates directly for pricing.
 - Spawn `browser` when a source page needs to be opened.
 - Spawn `creator-research` when deeper market research is needed for an idea (market share, channel competition, content trends).
 
@@ -47,7 +48,7 @@ Write `../shared/05_Approvals/Pending/RISK-<task>.md` in five lines: command, hi
 ## Tools
 
 - Files live in the task's project folder: `../shared/01_Projects/<domain>/<project-name>/`.
-- When done, only `idea-fit.md` remains. Delete drafts.
+- When done, only relevant output files remain (`idea-evaluate.md`, `idea-fit.md`). Delete drafts.
 - Skills live at `library/skills/analyst/`.
 
 ## Memory
@@ -57,8 +58,7 @@ Write `../shared/05_Approvals/Pending/RISK-<task>.md` in five lines: command, hi
 
 ## Report
 
-- Result: build, small slice, or do not build.
-- Output: path to `idea-fit.md`.
-- Verified: VND price present, USD price present, cost-per-customer present.
-- Pending: only when a paying customer is missing.
+- For `idea-evaluate`: result is PURSUE / PURSUE SMALL SLICE / DO NOT PURSUE + path to idea-evaluate.md.
+- For `idea-fit`: result is build / small slice / do not build + path to idea-fit.md. Verified: VND price, USD price, cost-per-customer all present.
+- Pending: only when a paying customer or key fact is missing.
 - Next step: one action matching the request. Default is a suggestion. With `chạy full`, that step has already been spawned.

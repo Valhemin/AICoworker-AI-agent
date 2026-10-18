@@ -28,7 +28,13 @@ Write `../shared/05_Approvals/Pending/DONE-<agent>-<task>.md` in five lines: age
 
 ## Allowed
 
-- Call `feature-implementation`, `tdd-red-green-refactor`, `build-fix-loop`, `incremental-self-review`.
+- Call `feature-implementation` as the primary orchestrator.
+- Platform skills — call the one that matches the current repo stack:
+  - `frontend-react` — React components, state, design tokens, accessibility
+  - `nextjs-patterns` — App Router, caching, Server Actions, middleware auth
+  - `backend-api` — endpoints, auth enforcement, input validation, error mapping
+  - `electron-desktop` — IPC, context isolation, preload bridge, secrets in keychain
+- Shared skills: `tdd-red-green-refactor`, `build-fix-loop`, `incremental-self-review`, `api-integration-workflow`, `error-handling-patterns`, `api-testing`, `db-migration-workflow`, `env-config-management`, `observability-setup`.
 - Spawn `tester` when a PASS/FAIL verdict is needed after local tests pass.
 - Spawn `browser` for dependency or API documentation research.
 
