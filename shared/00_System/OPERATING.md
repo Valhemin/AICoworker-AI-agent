@@ -92,8 +92,8 @@ Khi việc xong, xóa nháp, bản trùng, và ghi chú không nằm trong đầ
 
 Mỗi role một workspace, nên memory không dùng chung.
 
-- `MEMORY.md`: vài sự kiện còn hiệu lực. OpenClaw đưa file này vào phiên chính của đúng role.
-- `memory/YYYY-MM-DD.md`: nhật ký ngày, cũng chỉ trong workspace đó.
+- `MEMORY.md`: vài sự kiện còn hiệu lực. OpenClaw đưa file này vào phiên chính của đúng role. File này nằm trên máy người dùng, không commit. Mẫu vai trò là `MEMORY.starter.md`.
+- `memory/YYYY-MM-DD.md`: nhật ký ngày, cũng chỉ trong workspace đó. Không commit.
 - Phiên được giao việc không nhận memory. Sự kiện cần cho việc đó phải nằm trong task.
 - Không ghi secret. Không đọc memory của role khác.
 

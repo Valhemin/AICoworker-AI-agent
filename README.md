@@ -48,32 +48,42 @@ File mẫu đúng schema máy này: `openclaw.agents.example.json5`. Model để
 
 ## Model
 
-Cột mức là loại model để bạn điền id sau. Cùng một mức vẫn nên là id riêng nếu bạn muốn tách chi phí.
+Điền tên model. 9router lo phần nối. Cột đầu chạy hằng ngày. Hết cột thì sang cột kế. Hết ba cột thì Copilot Student Auto, rồi Gemma 4 12B.
 
-| Agent | Mức | Việc | Input | Output |
-|---|---|---|---|---|
-| `ceo` | Mạnh nhất | Chọn đường, dừng ý tưởng lỗ | Ý tưởng, `idea-fit.md` | Giao một agent, hoặc file BLOCKED |
-| `analyst` | Mạnh, không cần code | Có người trả tiền không | Một ý tưởng, tối đa ba nguồn | `idea-fit.md` |
-| `architect` | Mạnh | Spec, hoặc khoanh sự cố | Brief hoặc `support-issue.md` | Plan, hoặc `where.md` |
-| `designer` | Mạnh, giỏi thị giác | Gu và trạng thái màn hình | Brief và feedback một vòng | `DESIGN.md`, `interface.md`, `BRAND.md` nếu bán |
-| `implement` | Code mạnh nhất | Code theo spec | Spec, `DESIGN.md`, `interface.md` | Code chạy được |
-| `reviewer` | Mạnh, không viết code | Soát lát, không tin self-review | Spec và file đã đổi | `docs/review/review.md` |
-| `debug` | Code mạnh nhất | Sửa mục FAIL | Biên bản tester hoặc `where.md` | Sửa đúng các mục đó |
-| `rea` | Mạnh, đọc bằng chứng | Dựng lại một tool tương tự | Một file local và một hành vi | `rea-findings.md`. Không code sản phẩm |
-| `tester` | Code, rẻ hơn implement một bậc | PASS hoặc FAIL, hoặc một bước QA | Tiêu chí, lát đã code, hoặc case | `product-test.md`, hoặc file test trong repo |
-| `developer-work` | Rẻ, chỉ điều phối | Yêu cầu hoặc bug repo công ty | Repo và yêu cầu | Tester PASS hoặc BLOCKED |
-| `developer-personal` | Code riêng | Sửa repo đang chạy | Repo, design hoặc spec nếu có | Code đã sửa |
-| `marketer` | Mạnh, không cần code | Brand profile → kênh → bốn tài sản → lịch nội dung | Giá và bản để đưa ra | `profile.md`, `audience-channel.md`, `launch-sprint.md`, `content-calendar.md` |
-| `sales` | Mạnh, không cần code | Chuẩn bị bán + phân tích deal 1-1. Không liên hệ khách | Tên khách/sản phẩm + bối cảnh | Tài liệu chuẩn bị, deal notes, win-loss log |
-| `creator` | Mạnh về chữ | Kịch bản, rồi lệnh sản xuất | Đơn đã được phép làm | Kịch bản, sau đó `produce.md` |
-| `creator-story` | Mạnh về chữ | Cấu trúc và lời | Brief | Kịch bản |
-| `creator-visual` | Mạnh về hình | Ảnh và prompt video | `BRAND.md` | Một ảnh, một prompt video. Chưa render |
-| `creator-research` | Rẻ hơn một bậc | Fact | Một câu hỏi | Fact, tách suy đoán |
-| `creator-publish` | Rẻ hơn một bậc | Gói đăng, phụ đề, lệnh lồng tiếng | Kịch bản, file local, hoặc các link | `produce.md` và các file đã tải. Chưa render |
-| `support` | Rẻ | Ghi sự cố | Khách làm gì, thấy gì | `support-issue.md`, chuyển `architect` |
-| `browser` | Rẻ | Đọc, bấm, điền nháp trên trình duyệt có sẵn | Một URL hoặc một task hàng đợi | Handoff ngắn. Không gửi form |
-| `office` | Rẻ | File văn phòng | File được giao | File kết quả |
-| `application` | Rẻ | App desktop | Workflow đã có | File kết quả |
+Codex qua Plus chỉ có GPT-6.1 Sol, GPT-6 Sol, GPT-6 Luna. GPT-5.6 trở xuống không còn trên đường đăng nhập này. `GPT-6.1 Sol` lỗi thì đổi thành GPT-6 Sol.
+
+Cursor Pro gồm Grok 4.7, Grok 4.6 và Composer 2.5. Grok là model của Cursor, không phải provider riêng. Grok 4.7 cho code khó. Composer 2.5 cho việc rẻ.
+
+Claude Team dùng Sonnet 5.5 và Haiku 5.5. Sonnet 5 và Haiku 4.5 là fallback khi tên mới chưa hiện trên 9router. Opus 5.5 chỉ khi Sonnet 5.5 cho kết quả không dùng được.
+
+Antigravity Pro dùng Gemini 4 Argon và Gemini 3.8 Flash. Argon chạy ở app hoặc CLI, không có trong IDE. Muse Spark 1.3 chỉ thêm sau fallback code khi balance quà hiện trong 9router. Không bật bản Contributor.
+
+Gemma 4 12B giữ bản Q4, context quanh 16k. Chỉ cho `office`, `application`, `support`, `developer-work` khi các gói hết lượt.
+
+| Agent | Chạy mặc định | Fallback 1 | Fallback 2 |
+|---|---|---|---|
+| `ceo` | Claude Sonnet 5.5 | GPT-6 Sol | Claude Sonnet 5 |
+| `analyst` | GPT-6 Sol | Gemini 3.8 Flash | Claude Sonnet 5 |
+| `architect` | Claude Sonnet 5.5 | Grok 4.7 | GPT-6.1 Sol |
+| `designer` | Gemini 4 Argon | Gemini 3.8 Flash | Claude Sonnet 5.5 |
+| `implement` | Grok 4.7 | Claude Sonnet 5.5 | GPT-6.1 Sol |
+| `reviewer` | Claude Sonnet 5.5 | GPT-6 Sol | Grok 4.6 |
+| `debug` | Claude Sonnet 5.5 | Grok 4.7 | GPT-6.1 Sol |
+| `rea` | Claude Sonnet 5.5 | GPT-6 Sol | Gemini 3.8 Flash |
+| `tester` | Composer 2.5 | Gemini 3.8 Flash | GPT-6 Luna |
+| `developer-work` | Claude Haiku 5.5 | Gemini 3.8 Flash | GPT-6 Luna |
+| `developer-personal` | GPT-6.1 Sol | Grok 4.6 | Composer 2.5 |
+| `marketer` | Claude Sonnet 5.5 | GPT-6 Sol | Gemini 3.8 Flash |
+| `sales` | Claude Sonnet 5.5 | GPT-6 Sol | Gemini 3.8 Flash |
+| `creator` | Claude Sonnet 5.5 | GPT-6 Sol | Claude Sonnet 5 |
+| `creator-story` | Claude Sonnet 5.5 | GPT-6 Sol | GPT-6 Luna |
+| `creator-visual` | Gemini 4 Argon | Gemini 3.8 Flash | Claude Sonnet 5.5 |
+| `creator-research` | Gemini 3.8 Flash | GPT-6 Luna | Claude Haiku 5.5 |
+| `creator-publish` | Claude Haiku 5.5 | GPT-6 Luna | Gemini 3.8 Flash |
+| `support` | Claude Haiku 5.5 | Gemini 3.8 Flash | GPT-6 Luna |
+| `browser` | Gemini 3.8 Flash | Claude Haiku 5.5 | GPT-6 Luna |
+| `office` | GPT-6 Luna | Claude Haiku 5.5 | Gemma 4 12B |
+| `application` | Claude Haiku 5.5 | Gemini 3.8 Flash | Gemma 4 12B |
 
 ## Thư mục dự án
 

@@ -9,3 +9,40 @@ shared/08_Downloads-Quarantine/**
 *.pem
 *.key
 openclaw.json
+
+# Trạng thái OpenClaw ghi khi mở workspace
+workspaces/*/.openclaw/
+
+# Nhật ký đang chạy. Hướng dẫn vai trò nằm ở MEMORY.starter.md.
+# Copy thành MEMORY.md trên máy mình. File đó không vào git.
+workspaces/*/MEMORY.md
+workspaces/*/memory/**
+!workspaces/*/memory/.gitkeep
+
+# Đầu ra khi agent làm việc. Khung thư mục vẫn được commit qua .gitkeep.
+shared/01_Projects/**
+!shared/01_Projects/
+!shared/01_Projects/**/
+!shared/01_Projects/**/.gitkeep
+
+shared/03_Brand/**
+!shared/03_Brand/README.md
+
+shared/04_Queues/**
+!shared/04_Queues/
+!shared/04_Queues/**/
+!shared/04_Queues/**/.gitkeep
+
+shared/05_Approvals/**
+!shared/05_Approvals/
+!shared/05_Approvals/**/
+!shared/05_Approvals/**/.gitkeep
+
+shared/07_Evidence/**
+!shared/07_Evidence/
+!shared/07_Evidence/**/
+!shared/07_Evidence/**/.gitkeep
+
+shared/09_Logs/**
+!shared/09_Logs/
+!shared/09_Logs/.gitkeep
