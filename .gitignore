@@ -13,6 +13,14 @@ openclaw.json
 # Trạng thái OpenClaw ghi khi mở workspace
 workspaces/*/.openclaw/
 
+# Tạm của skill (deep-research lock, notebook, card)
+workspaces/*/tmp/
+tmp/
+
+# Token / credential máy local (không bao giờ commit)
+.credentials/
+**/telegram.bot.token
+
 # Nhật ký đang chạy. Hướng dẫn vai trò nằm ở MEMORY.starter.md.
 # Copy thành MEMORY.md trên máy mình. File đó không vào git.
 workspaces/*/MEMORY.md

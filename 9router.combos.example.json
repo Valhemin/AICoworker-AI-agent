@@ -1,0 +1,238 @@
+{
+  "_comment": "SNAPSHOT một máy đã confirm provider (ví dụ: có Claude+Cursor+Antigravity, GPT không Plus → Luna thay Sol). README → Model = khuyến nghị đủ gói + checklist confirm mọi provider rồi chỉnh. Không import mù. Không API key. Sau sync OpenClaw: contextWindow 200000 (256000 cho agent-browser, agent-creator-research, agent-designer).",
+  "_openclawAgentId": {
+    "agent-ceo": "main (workspace workspaces/ceo, name CEO)"
+  },
+  "_providersOnThisSnapshot": ["claude-team", "cursor", "antigravity", "gpt-free-luna-only"],
+  "_lastSyncedFrom": "~/.9router/db.json",
+  "contextWindow": {
+    "default": 200000,
+    "byCombo": {
+      "agent-browser": 256000,
+      "agent-creator-research": 256000,
+      "agent-designer": 256000
+    }
+  },
+  "combos": [
+    {
+      "name": "agent-analyst",
+      "models": [
+        "cc/claude-sonnet-5-5",
+        "ag/gemini-3.8-flash-medium",
+        "cx/gpt-6-luna",
+        "cu/grok-4.7-medium",
+        "cu/composer-2.5"
+      ]
+    },
+    {
+      "name": "agent-application",
+      "models": [
+        "cc/claude-haiku-5-5",
+        "cx/gpt-6-luna",
+        "ag/gemini-3.8-flash-low",
+        "cu/composer-2.5",
+        "cu/grok-4.7-low"
+      ]
+    },
+    {
+      "name": "agent-architect",
+      "models": [
+        "cc/claude-sonnet-5-5(high)",
+        "ag/gemini-4-argon-high",
+        "cx/gpt-6-luna(high)",
+        "cu/grok-4.7-high",
+        "cu/composer-2.5"
+      ]
+    },
+    {
+      "name": "agent-browser",
+      "models": [
+        "ag/gemini-3.8-flash-low",
+        "cc/claude-haiku-5-5",
+        "cx/gpt-6-luna",
+        "cu/composer-2.5",
+        "cu/grok-4.7-low"
+      ]
+    },
+    {
+      "name": "agent-ceo",
+      "models": [
+        "cc/claude-sonnet-5-5",
+        "ag/gemini-4-argon-high",
+        "cx/gpt-6-luna",
+        "cu/grok-4.7-medium",
+        "cu/composer-2.5"
+      ]
+    },
+    {
+      "name": "agent-creator",
+      "models": [
+        "cc/claude-sonnet-5-5",
+        "ag/gemini-3.8-flash-medium",
+        "cx/gpt-6-luna",
+        "cu/grok-4.7-medium",
+        "cu/composer-2.5"
+      ]
+    },
+    {
+      "name": "agent-creator-publish",
+      "models": [
+        "cc/claude-haiku-5-5",
+        "cx/gpt-6-luna",
+        "ag/gemini-3.8-flash-low",
+        "cu/composer-2.5",
+        "cu/grok-4.7-low"
+      ]
+    },
+    {
+      "name": "agent-creator-research",
+      "models": [
+        "ag/gemini-3.8-flash-medium",
+        "cc/claude-haiku-5-5",
+        "cx/gpt-6-luna",
+        "cu/composer-2.5",
+        "cu/grok-4.7-low"
+      ]
+    },
+    {
+      "name": "agent-creator-story",
+      "models": [
+        "cc/claude-sonnet-5-5",
+        "ag/gemini-3.8-flash-medium",
+        "cx/gpt-6-luna",
+        "cu/grok-4.7-medium",
+        "cu/composer-2.5"
+      ]
+    },
+    {
+      "name": "agent-creator-visual",
+      "models": [
+        "ag/gemini-4-argon-high",
+        "cc/claude-sonnet-5-5",
+        "cu/grok-4.7-medium",
+        "cx/gpt-6-luna",
+        "cu/composer-2.5"
+      ]
+    },
+    {
+      "name": "agent-debug",
+      "models": [
+        "cc/claude-sonnet-5-5(high)",
+        "ag/gemini-3.8-flash-high",
+        "cx/gpt-6-luna(high)",
+        "cu/grok-4.7-high",
+        "cu/composer-2.5"
+      ]
+    },
+    {
+      "name": "agent-designer",
+      "models": [
+        "ag/gemini-4-argon-high",
+        "cc/claude-sonnet-5-5",
+        "cu/grok-4.7-medium",
+        "cx/gpt-6-luna",
+        "cu/composer-2.5"
+      ]
+    },
+    {
+      "name": "agent-developer-personal",
+      "models": [
+        "cc/claude-sonnet-5-5",
+        "ag/gemini-3.8-flash-medium",
+        "cx/gpt-6-luna",
+        "cu/grok-4.7-medium",
+        "cu/composer-2.5"
+      ]
+    },
+    {
+      "name": "agent-developer-work",
+      "models": [
+        "cc/claude-haiku-5-5",
+        "cx/gpt-6-luna",
+        "ag/gemini-3.8-flash-low",
+        "cu/composer-2.5",
+        "cu/grok-4.7-low"
+      ]
+    },
+    {
+      "name": "agent-implement",
+      "models": [
+        "cu/grok-4.7-high",
+        "cc/claude-sonnet-5-5",
+        "ag/gemini-3.8-flash-medium",
+        "cx/gpt-6-luna",
+        "cu/composer-2.5"
+      ]
+    },
+    {
+      "name": "agent-marketer",
+      "models": [
+        "cc/claude-sonnet-5-5",
+        "ag/gemini-3.8-flash-medium",
+        "cx/gpt-6-luna",
+        "cu/grok-4.7-medium",
+        "cu/composer-2.5"
+      ]
+    },
+    {
+      "name": "agent-office",
+      "models": [
+        "cx/gpt-6-luna",
+        "cc/claude-haiku-5-5",
+        "ag/gemini-3.8-flash-low",
+        "cu/composer-2.5",
+        "cu/grok-4.7-low"
+      ]
+    },
+    {
+      "name": "agent-rea",
+      "models": [
+        "cc/claude-sonnet-5-5(high)",
+        "ag/gemini-3.8-flash-medium",
+        "cx/gpt-6-luna(high)",
+        "cu/grok-4.7-medium",
+        "cu/composer-2.5"
+      ]
+    },
+    {
+      "name": "agent-reviewer",
+      "models": [
+        "cc/claude-sonnet-5-5",
+        "ag/gemini-3.8-flash-medium",
+        "cx/gpt-6-luna",
+        "cu/grok-4.7-medium",
+        "cu/composer-2.5"
+      ]
+    },
+    {
+      "name": "agent-sales",
+      "models": [
+        "cc/claude-sonnet-5-5",
+        "ag/gemini-3.8-flash-medium",
+        "cx/gpt-6-luna",
+        "cu/grok-4.7-medium",
+        "cu/composer-2.5"
+      ]
+    },
+    {
+      "name": "agent-support",
+      "models": [
+        "cc/claude-haiku-5-5",
+        "cx/gpt-6-luna",
+        "ag/gemini-3.8-flash-low",
+        "cu/composer-2.5",
+        "cu/grok-4.7-low"
+      ]
+    },
+    {
+      "name": "agent-tester",
+      "models": [
+        "cu/composer-2.5",
+        "cc/claude-haiku-5-5",
+        "cx/gpt-6-luna",
+        "ag/gemini-3.8-flash-low",
+        "cu/grok-4.7-low"
+      ]
+    }
+  ]
+}

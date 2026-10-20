@@ -1,10 +1,21 @@
-// Schema của AICoworker đang cài: agents.list, không phải agents.entries.
-// Model để trống: agent dùng model mặc định trong ~/.openclaw/openclaw.json.
-// skills là allowlist. Phiên chính chỉ thấy mô tả của các skill này.
-// extraDirs là thư mục cha, một cấp, vì app chỉ quét <dir>/<skill>/SKILL.md.
-// Không ghi API key.
+// Schema AICoworker: agents.list (không phải agents.entries).
+// Trước khi merge: thay mọi <REPO_ROOT> bằng đường dẫn tuyệt đối tới clone repo này.
+// Agent mặc định của app là id "main" (không xóa được) — dùng workspace ceo, name CEO.
+// Model để trống → dùng model mặc định trong openclaw.json; hoặc trỏ 9router agent-*.
+// skills = allowlist. extraDirs = thư mục cha một cấp (<dir>/<skill>/SKILL.md).
+// Không ghi API key / bot token vào file này hay vào git.
 
 {
+  // Telegram: bật trên máy thật (enabled: true + tokenFile có token). Không commit token.
+  // Agent ghi DONE-/RISK-/BLOCKED- vào shared/05_Approvals/Pending/; CEO heartbeat gửi tóm tắt.
+  channels: {
+    telegram: {
+      enabled: false,
+      dmPolicy: "pairing",
+      tokenFile: "<HOME>/.openclaw/credentials/telegram.bot.token",
+      groupPolicy: "allowlist"
+    }
+  },
   mcp: {
     servers: {
       rea: {
@@ -21,41 +32,54 @@
   skills: {
     load: {
       extraDirs: [
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/_catalog",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/_shared",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/analyst",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/application",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/architect",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/browser",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/ceo",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/creator",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/creator-publish",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/creator-research",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/creator-story",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/creator-visual",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/debug",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/designer",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/developer-personal",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/developer-work",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/implement",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/marketer",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/office",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/rea",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/reviewer",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/sales",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/support",
-        "/Users/jude/Downloads/Personal/Code/aicoworker/library/skills/tester"
+        "<REPO_ROOT>/library/skills/_catalog",
+        "<REPO_ROOT>/library/skills/_shared",
+        "<REPO_ROOT>/library/skills/analyst",
+        "<REPO_ROOT>/library/skills/application",
+        "<REPO_ROOT>/library/skills/architect",
+        "<REPO_ROOT>/library/skills/browser",
+        "<REPO_ROOT>/library/skills/ceo",
+        "<REPO_ROOT>/library/skills/creator",
+        "<REPO_ROOT>/library/skills/creator-publish",
+        "<REPO_ROOT>/library/skills/creator-research",
+        "<REPO_ROOT>/library/skills/creator-story",
+        "<REPO_ROOT>/library/skills/creator-visual",
+        "<REPO_ROOT>/library/skills/debug",
+        "<REPO_ROOT>/library/skills/designer",
+        "<REPO_ROOT>/library/skills/developer-personal",
+        "<REPO_ROOT>/library/skills/developer-work",
+        "<REPO_ROOT>/library/skills/implement",
+        "<REPO_ROOT>/library/skills/marketer",
+        "<REPO_ROOT>/library/skills/office",
+        "<REPO_ROOT>/library/skills/rea",
+        "<REPO_ROOT>/library/skills/reviewer",
+        "<REPO_ROOT>/library/skills/sales",
+        "<REPO_ROOT>/library/skills/support",
+        "<REPO_ROOT>/library/skills/tester"
       ],
       watch: true
     }
   },
   agents: {
+    // Compaction: reserve tuyệt đối. Flush ≈ contextWindow − 20000 − 4000.
+    // contextWindow agent-*: 200k mặc định, 256k cho browser/research/designer — không 1M (đã có memoryFlush).
+    defaults: {
+      compaction: {
+        mode: "safeguard",
+        reserveTokensFloor: 20000,
+        memoryFlush: {
+          enabled: true,
+          softThresholdTokens: 4000,
+          forceFlushTranscriptBytes: 33554432 // 32MB
+        }
+      }
+    },
     list: [
       {
-        id: "ceo",
-        name: "ceo",
+        id: "main",
+        name: "CEO",
         default: true,
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/ceo",
+        workspace: "<REPO_ROOT>/workspaces/ceo",
         skills: [
           "route-work",
           "work-plan",
@@ -94,7 +118,7 @@
       {
         id: "analyst",
         name: "analyst",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/analyst",
+        workspace: "<REPO_ROOT>/workspaces/analyst",
         skills: [
           "idea-evaluate",
           "idea-fit"
@@ -109,7 +133,7 @@
       {
         id: "marketer",
         name: "marketer",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/marketer",
+        workspace: "<REPO_ROOT>/workspaces/marketer",
         skills: [
           "brand-profile",
           "audience-channel",
@@ -129,7 +153,7 @@
       {
         id: "support",
         name: "support",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/support",
+        workspace: "<REPO_ROOT>/workspaces/support",
         skills: [
           "customer-issue",
           "user-faq"
@@ -144,7 +168,7 @@
       {
         id: "rea",
         name: "rea",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/rea",
+        workspace: "<REPO_ROOT>/workspaces/rea",
         skills: [
           "rea-investigate"
         ],
@@ -155,7 +179,7 @@
       {
         id: "developer-work",
         name: "developer-work",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/developer-work",
+        workspace: "<REPO_ROOT>/workspaces/developer-work",
         skills: [
           "company-task"
         ],
@@ -173,7 +197,7 @@
       {
         id: "developer-personal",
         name: "developer-personal",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/developer-personal",
+        workspace: "<REPO_ROOT>/workspaces/developer-personal",
         skills: [
           "personal-task",
           "search-first",
@@ -208,7 +232,7 @@
       {
         id: "architect",
         name: "architect",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/architect",
+        workspace: "<REPO_ROOT>/workspaces/architect",
         skills: [
           "new-project-discovery",
           "product-requirements",
@@ -231,7 +255,7 @@
       {
         id: "designer",
         name: "designer",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/designer",
+        workspace: "<REPO_ROOT>/workspaces/designer",
         skills: [
           "design-direction",
           "ui-ux-spec",
@@ -245,7 +269,7 @@
       {
         id: "implement",
         name: "implement",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/implement",
+        workspace: "<REPO_ROOT>/workspaces/implement",
         skills: [
           "feature-implementation",
           "tasks-md-execution",
@@ -289,7 +313,7 @@
       {
         id: "reviewer",
         name: "reviewer",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/reviewer",
+        workspace: "<REPO_ROOT>/workspaces/reviewer",
         skills: [
           "independent-review",
           "command-risk"
@@ -304,7 +328,7 @@
       {
         id: "sales",
         name: "sales",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/sales",
+        workspace: "<REPO_ROOT>/workspaces/sales",
         skills: [
           "sales-context",
           "value-prop",
@@ -324,7 +348,7 @@
       {
         id: "tester",
         name: "tester",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/tester",
+        workspace: "<REPO_ROOT>/workspaces/tester",
         skills: [
           "product-test",
           "qa-plan",
@@ -345,7 +369,7 @@
       {
         id: "debug",
         name: "debug",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/debug",
+        workspace: "<REPO_ROOT>/workspaces/debug",
         skills: [
           "systematic-debugging-superpowers",
           "root-cause-debugging",
@@ -362,7 +386,7 @@
       {
         id: "browser",
         name: "browser",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/browser",
+        workspace: "<REPO_ROOT>/workspaces/browser",
         skills: [
           "browser-task"
         ],
@@ -373,7 +397,7 @@
       {
         id: "office",
         name: "office",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/office",
+        workspace: "<REPO_ROOT>/workspaces/office",
         skills: [
           "office-task"
         ],
@@ -384,7 +408,7 @@
       {
         id: "application",
         name: "application",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/application",
+        workspace: "<REPO_ROOT>/workspaces/application",
         skills: [
           "app-task"
         ],
@@ -395,7 +419,7 @@
       {
         id: "creator",
         name: "creator",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/creator",
+        workspace: "<REPO_ROOT>/workspaces/creator",
         skills: [
           "creator-orchestrator",
           "creative-brief",
@@ -419,7 +443,7 @@
       {
         id: "creator-research",
         name: "creator-research",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/creator-research",
+        workspace: "<REPO_ROOT>/workspaces/creator-research",
         skills: [
           "market-intelligence",
           "research-fact-verification",
@@ -433,7 +457,7 @@
       {
         id: "creator-story",
         name: "creator-story",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/creator-story",
+        workspace: "<REPO_ROOT>/workspaces/creator-story",
         skills: [
           "concept-development",
           "story-architecture",
@@ -453,7 +477,7 @@
       {
         id: "creator-visual",
         name: "creator-visual",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/creator-visual",
+        workspace: "<REPO_ROOT>/workspaces/creator-visual",
         skills: [
           "directing-blocking",
           "cinematography-shot-design",
@@ -473,7 +497,7 @@
       {
         id: "creator-publish",
         name: "creator-publish",
-        workspace: "/Users/jude/Downloads/Personal/Code/aicoworker/workspaces/creator-publish",
+        workspace: "<REPO_ROOT>/workspaces/creator-publish",
         skills: [
           "editing-postproduction",
           "packaging-distribution",
