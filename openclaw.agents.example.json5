@@ -48,12 +48,15 @@
         "<REPO_ROOT>/library/skills/designer",
         "<REPO_ROOT>/library/skills/developer-personal",
         "<REPO_ROOT>/library/skills/developer-work",
+        "<REPO_ROOT>/library/skills/devops",
+        "<REPO_ROOT>/library/skills/finance",
         "<REPO_ROOT>/library/skills/implement",
         "<REPO_ROOT>/library/skills/marketer",
         "<REPO_ROOT>/library/skills/office",
         "<REPO_ROOT>/library/skills/rea",
         "<REPO_ROOT>/library/skills/reviewer",
         "<REPO_ROOT>/library/skills/sales",
+        "<REPO_ROOT>/library/skills/security",
         "<REPO_ROOT>/library/skills/support",
         "<REPO_ROOT>/library/skills/tester"
       ],
@@ -110,8 +113,12 @@
             "creator-story",
             "creator-visual",
             "creator-publish",
+            "creator-reup",
             "developer-work",
-            "developer-personal"
+            "developer-personal",
+            "devops",
+            "finance",
+            "security"
           ]
         }
       },
@@ -121,7 +128,8 @@
         workspace: "<REPO_ROOT>/workspaces/analyst",
         skills: [
           "idea-evaluate",
-          "idea-fit"
+          "idea-fit",
+          "unit-economics-audit"
         ],
         subagents: {
           allowAgents: [
@@ -135,11 +143,14 @@
         name: "marketer",
         workspace: "<REPO_ROOT>/workspaces/marketer",
         skills: [
+          "growth-marketing-router",
           "brand-profile",
           "audience-channel",
           "launch-sprint",
           "content-calendar",
-          "competitor-watch"
+          "competitor-watch",
+          "paid-media-audit",
+          "product-telemetry-tracking"
         ],
         subagents: {
           allowAgents: [
@@ -156,7 +167,8 @@
         workspace: "<REPO_ROOT>/workspaces/support",
         skills: [
           "customer-issue",
-          "user-faq"
+          "user-faq",
+          "customer-retention"
         ],
         subagents: {
           allowAgents: [
@@ -181,7 +193,8 @@
         name: "developer-work",
         workspace: "<REPO_ROOT>/workspaces/developer-work",
         skills: [
-          "company-task"
+          "company-task",
+          "dev-skill-router"
         ],
         subagents: {
           allowAgents: [
@@ -190,6 +203,7 @@
             "reviewer",
             "debug",
             "tester",
+            "devops",
             "rea"
           ]
         }
@@ -211,6 +225,10 @@
           "verify-change",
           "work-plan",
           "security-threat-model",
+          "web-security-assurance",
+          "product-legal-compliance",
+          "data-privacy-compliance",
+          "consent-and-erasure",
           "mcp-server-build",
           "mcp-connect",
           "follow-design",
@@ -241,7 +259,11 @@
           "lead-decomposition",
           "spec-consistency-analysis",
           "stack-selection",
-          "work-plan"
+          "work-plan",
+          "product-legal-compliance",
+          "data-privacy-compliance",
+          "consent-and-erasure",
+          "web-security-assurance"
         ],
         subagents: {
           allowAgents: [
@@ -285,6 +307,10 @@
           "mcp-connect",
           "work-plan",
           "security-threat-model",
+          "web-security-assurance",
+          "product-legal-compliance",
+          "data-privacy-compliance",
+          "consent-and-erasure",
           "command-risk",
           "code-structure",
           // platform skills — load the one matching the current project stack
@@ -316,6 +342,9 @@
         workspace: "<REPO_ROOT>/workspaces/reviewer",
         skills: [
           "independent-review",
+          "web-security-assurance",
+          "product-legal-compliance",
+          "consent-and-erasure",
           "command-risk"
         ],
         subagents: {
@@ -376,6 +405,7 @@
           "regression-test-design",
           "build-fix-loop",
           "security-threat-model",
+          "web-security-assurance",
           "command-risk",
           "code-structure"
         ],
@@ -421,6 +451,7 @@
         name: "creator",
         workspace: "<REPO_ROOT>/workspaces/creator",
         skills: [
+          "media-video-router",
           "creator-orchestrator",
           "creative-brief",
           "creative-producer",
@@ -436,7 +467,8 @@
             "creator-research",
             "creator-story",
             "creator-visual",
-            "creator-publish"
+            "creator-publish",
+            "creator-reup"
           ]
         }
       },
@@ -485,10 +517,12 @@
           "storyboard-animatic",
           "image-prompt-engineering",
           "video-motion-prompt-engineering",
+          "programmatic-video",
           "brand-visual",
           "motion-graphics-vfx-planning",
           "continuity-supervision",
-          "visual-explanation-design"
+          "visual-explanation-design",
+          "consistent-character-anchor"
         ],
         subagents: {
           allowAgents: []
@@ -499,6 +533,7 @@
         name: "creator-publish",
         workspace: "<REPO_ROOT>/workspaces/creator-publish",
         skills: [
+          "media-video-router",
           "editing-postproduction",
           "packaging-distribution",
           "localization-cultural-adaptation",
@@ -512,10 +547,84 @@
           "opencreator-subtitle",
           "opencreator-voice",
           "opencreator-render",
-          "opencreator-cover"
+          "opencreator-cover",
+          "voiceover-tts-sync",
+          "ai-video-assembly"
         ],
         subagents: {
           allowAgents: []
+        }
+      },
+      {
+        id: "finance",
+        name: "finance",
+        workspace: "<REPO_ROOT>/workspaces/finance",
+        skills: [
+          "ops-security-router",
+          "cashflow-runway",
+          "billing-bookkeeping",
+          "unit-economics-audit"
+        ],
+        subagents: {
+          allowAgents: [
+            "browser"
+          ]
+        }
+      },
+      {
+        id: "security",
+        name: "security",
+        workspace: "<REPO_ROOT>/workspaces/security",
+        skills: [
+          "ops-security-router",
+          "cloud-secrets-audit",
+          "appsec-pentest-review",
+          "web-security-assurance",
+          "config-security-audit",
+          "security-threat-model"
+        ],
+        subagents: {
+          allowAgents: [
+            "browser"
+          ]
+        }
+      },
+      {
+        id: "devops",
+        name: "devops",
+        workspace: "<REPO_ROOT>/workspaces/devops",
+        skills: [
+          "ops-security-router",
+          "ci-cd-pipeline",
+          "cloud-deploy-release",
+          "database-backup-dr"
+        ],
+        subagents: {
+          allowAgents: [
+            "browser"
+          ]
+        }
+      },
+      {
+        id: "creator-reup",
+        name: "creator-reup",
+        workspace: "<REPO_ROOT>/workspaces/creator-reup",
+        skills: [
+          "media-video-router",
+          "opencreator-handoff",
+          "opencreator-download",
+          "opencreator-subtitle",
+          "opencreator-voice",
+          "semantic-subtitle-translation",
+          "video-transform-dedup",
+          "opencreator-render",
+          "opencreator-cover",
+          "localization-cultural-adaptation"
+        ],
+        subagents: {
+          allowAgents: [
+            "browser"
+          ]
         }
       }
     ]

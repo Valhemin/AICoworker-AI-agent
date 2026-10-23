@@ -27,6 +27,12 @@ SKIP: bug fixes that tester already pinpointed — those go to debug directly
 
 Work through every section. Skip a section only if it provably does not apply — write the skip reason.
 
+If the slice changes auth, input, sessions, files, payments, or a public web response, also apply `web-security-assurance`. A missing CRITICAL or HIGH control is FAIL.
+
+If the slice is a website or desktop app that collects personal data or sells to consumers, also apply `product-legal-compliance`. A missing in-product page or function is FAIL. A missing OWNER ACTION filing is a note, not a FAIL, unless the spec said the filing was already done and the UI fakes a government badge.
+
+If personal data is stored, also apply `consent-and-erasure`. FAIL when a purpose has no stored row, an optional purpose is pre-ticked, export omits data the product stores, or delete only hides the UI or only clears the device.
+
 ### 1. Spec compliance
 
 - Does the code do exactly what the spec requires — no more, no less?

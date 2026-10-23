@@ -1,0 +1,5 @@
+{
+  "width": 1080, "height": 1920, "fps": 30, "totalFrames": 90, "transitionFrames": 9, "sfx": false, "captions": false,
+  "brand": { "accent": "#0F766E", "accent2": "#6366F1", "background": "#0B1220", "text": "#F8FAFC", "track": "#1E293B", "ctaText": "#F8FAFC" },
+  "scenes": [{ "type": "title", "title": "Placeholder - run make_video.py", "frames": 90, "words": [] }]
+}

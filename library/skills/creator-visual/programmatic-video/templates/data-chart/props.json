@@ -1,0 +1,18 @@
+{
+  "genre": "data-chart",
+  "phase": 3,
+  "packs": ["core", "assets", "data"],
+  "title": "Weekly signups",
+  "unit": "users",
+  "accent": "#059669",
+  "background": "#022C22",
+  "text": "#ECFDF5",
+  "track": "#064E3B",
+  "series": [
+    { "label": "Mon", "value": 12 },
+    { "label": "Tue", "value": 18 },
+    { "label": "Wed", "value": 15 },
+    { "label": "Thu", "value": 24 },
+    { "label": "Fri", "value": 31 }
+  ]
+}

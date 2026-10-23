@@ -26,6 +26,7 @@ Fill gaps with reasonable assumptions before writing requirements. Record each a
 - **Out-of-scope**: explicit list. If nothing is explicitly out-of-scope, add a section stating what reasonable adjacent features are excluded.
 - **Assumptions**: all assumptions recorded here in addition to inline.
 - **Risks and open questions**: only unresolved CRITICAL gaps. Non-critical gaps resolved by assumption.
+- **Legal surface**: when the product is a website, web app, or desktop app that collects personal data, sells, or targets Vietnam or a global market, add the checklist from `product-legal-compliance`. Put required pages and desktop functions into functional requirements. Put ministry filings, impact assessments, and e-invoice registration in OWNER ACTION, not as fake UI. When personal data is stored, add the field inventory from `data-privacy-compliance` and the consent, export, and server-delete requirements from `consent-and-erasure`.
 
 ## Proactive gap-finding (mandatory, run after drafting)
 

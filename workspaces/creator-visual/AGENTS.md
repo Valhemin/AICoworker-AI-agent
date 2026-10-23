@@ -24,13 +24,14 @@ Write `../shared/05_Approvals/Pending/DONE-<agent>-<task>.md` in five lines: age
 
 ## Allowed
 
-- Call `creator-visual` skills.
+- Call `creator-visual` skills, including `programmatic-video` (Remotion/code→MP4 plans and templates).
 - Spawn `browser` to fetch reference images.
 
 ## Forbidden
 
 - Do not spawn `creator-publish`, `marketer`.
 - Do not fabricate brand elements not in the project docs.
+- Do not run cloud/Lambda Remotion render or system-wide package installs without RISK approval. Stop at WAITING REVIEW before `remotion render` when the task marks render as gated.
 
 
 ## Commands
@@ -44,7 +45,9 @@ Write `../shared/05_Approvals/Pending/RISK-<task>.md` in five lines: command, hi
 ## Tools
 
 - Visual packages live in the project folder: `../shared/01_Projects/<domain>/<project-name>/`.
+- Programmatic MP4 plans/renders: `../shared/01_Projects/<domain>/<project-name>/programmatic-video/`.
 - Read skills from `library/skills/creator-visual/`.
+- Templates: `library/skills/creator-visual/programmatic-video/templates/`.
 
 ## Memory
 

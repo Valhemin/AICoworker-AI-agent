@@ -12,6 +12,8 @@ SKIP: features with no user data, no PII, and no regulated data involved
 
 Use when a feature spec involves user data, account data, third-party data, analytics, or any personally identifiable information. Also use when reviewing a spec that mentions "user data" without classifying it.
 
+Vietnam personal-data law as of 2026-01-01 is Law 91/2025/QH15 and Decree 356/2025/NĐ-CP. Decree 13/2023/NĐ-CP is no longer in force. Pages and desktop functions are in `product-legal-compliance`. The stored consent row, export, and server delete are in `consent-and-erasure`.
+
 ## Trigger patterns
 
 - Feature stores, transmits, or displays user information
@@ -52,8 +54,9 @@ Identify which regulations apply based on user geography and data types:
 
 | Regulation | Applies when | Key requirements |
 |---|---|---|
+| Law 91/2025/QH15 + Decree 356/2025/NĐ-CP | Users in Vietnam, or processing of Vietnamese people's data | Notice, per-purpose consent, access/correction/deletion/withdrawal, 72-hour notice for serious incidents. Decree 13/2023 is repealed |
 | GDPR | EU/EEA users or data | Lawful basis, consent, right to erasure, DPA |
-| CCPA | California users, >$25M revenue or >50K users | Right to opt-out of sale, disclosure |
+| CCPA/CPRA | California users | Notice at collection, opt-out of sale/share, access and deletion |
 | HIPAA | US health data | BAA required, encryption, audit logs |
 | PCI-DSS | Card payment handling | Scope minimization, or delegate to compliant provider |
 | PDPA | Thai users | Consent-based, data subject rights |

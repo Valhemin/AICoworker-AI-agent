@@ -72,7 +72,7 @@ Required columns: `TC-ID` | `Title` | `Steps` | `Expected` | `Risk tag` | `Resul
 - `Result` column starts as `Not run`
 - `Risk tag`: `@smoke` (broken = product cannot be used immediately) or `@regression` (broken = degraded but workaround exists)
 
-### Seven mandatory test groups
+### Mandatory test groups
 
 Cover all that apply. Groups that do not apply: write the reason.
 
@@ -106,6 +106,15 @@ For text fields: too short, too long (at the character limit, and one over). For
 Already covered in Group 4, but add these for multi-tenant or multi-role features:
 - Can user A see user B's data by modifying the URL or request?
 - Can a lower-role user perform a higher-role action by modifying the request?
+
+**Group 8 — Legal surface, consent, and erasure** (when the product collects personal data, sets non-essential cookies, or sells)
+Skip only when none of those are true, and write that reason.
+- Each required legal page or desktop screen opens and is not a 404. Tag `@smoke` for privacy notice, terms, and the complaint path.
+- Optional consent is not pre-ticked. Rejecting cookies or ads leaves non-essential tags unset. A stored consent row exists for the choice.
+- Checkout shows the amount and fees, then waits for a separate confirm.
+- Export returns the personal data the product stores for that account.
+- Delete removes or anonymizes the account on the server. Logging in again with the old session fails. A desktop uninstall alone does not pass this case.
+- User A cannot export or delete user B.
 
 ---
 

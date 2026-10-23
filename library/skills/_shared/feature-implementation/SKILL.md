@@ -34,6 +34,10 @@ This skill coordinates the following skills — invoke them at the indicated ste
 | `env-config-management` | When new env vars, secrets, or feature flags are introduced |
 | `observability-setup` | When starting a new service, or when logger/health check/error tracker is not yet present |
 | `tdd-red-green-refactor` | When test infrastructure exists and the logic is non-trivial |
+| `web-security-assurance` | When the scope adds or changes a web entry point, API, session, upload, payment, or the server a desktop app calls |
+| `product-legal-compliance` | When the scope is a website or desktop app that collects personal data, sells, or ships to Vietnam or a named market |
+| `data-privacy-compliance` | When the scope stores, shows, or sends personal data — classify fields before coding retention or deletion |
+| `consent-and-erasure` | When the scope collects personal data — store a consent row per purpose and a real server export and delete |
 | `incremental-self-review` | After each scope before moving to the next |
 | `verification-before-completion` | Before final completion report |
 | `browser-testing-workflow` | Only when user explicitly asks for E2E or UI testing |
@@ -45,6 +49,8 @@ This skill coordinates the following skills — invoke them at the indicated ste
 2b. **Design gate** — if a scope changes a screen, flow, or form, run `follow-design` before writing UI. Missing `docs/design/` stops the UI scope. Backend scope may continue.
 2c. **SEO gate** — if a scope is a public web page and the task is not from `developer-work`, run `web-seo` while implementing that page.
 2d. **Structure gate** — run `code-structure` before adding a new module. Follow the repo. Do not open a second layout.
+2e. **Security gate** — if the scope adds or changes an entry point in the `web-security-assurance` trigger, run that skill before calling the scope done. Open CRITICAL or HIGH controls block the scope.
+2f. **Legal gate** — if the scope is a public site, account, sale, or desktop app in the `product-legal-compliance` trigger, add the pages or in-app functions that skill marks in product. List OWNER ACTION filings in the completion output. Do not claim the product is certified. If the scope stores personal data, run `data-privacy-compliance` for the field inventory and `consent-and-erasure` for the consent row, export, and server delete.
 3. **Implement one coherent scope.**
 4. **Run `incremental-self-review`** — do not skip.
 5. **Run focused verification** — typecheck, lint, tests. Record command and result.

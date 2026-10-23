@@ -34,7 +34,7 @@ Write `../shared/05_Approvals/Pending/DONE-<agent>-<task>.md` in five lines: age
   - `nextjs-patterns` — App Router, caching, Server Actions, middleware auth
   - `backend-api` — endpoints, auth enforcement, input validation, error mapping
   - `electron-desktop` — IPC, context isolation, preload bridge, secrets in keychain
-- Shared skills: `tdd-red-green-refactor`, `build-fix-loop`, `incremental-self-review`, `api-integration-workflow`, `error-handling-patterns`, `api-testing`, `db-migration-workflow`, `env-config-management`, `observability-setup`.
+- Shared skills: `tdd-red-green-refactor`, `build-fix-loop`, `incremental-self-review`, `api-integration-workflow`, `error-handling-patterns`, `api-testing`, `db-migration-workflow`, `env-config-management`, `observability-setup`, `web-security-assurance`, `product-legal-compliance`, `data-privacy-compliance`, `consent-and-erasure`.
 - Spawn `tester` when a PASS/FAIL verdict is needed after local tests pass.
 - Spawn `browser` for dependency or API documentation research.
 

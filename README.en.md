@@ -46,6 +46,8 @@ The skill index is the list OpenClaw injects into a main session: name, one-line
 
 The setup file matches the app installed on this machine. Leave `model` unset and the agent uses the machine default.
 
+Using the skills in other repos (Claude, Codex, Antigravity, Cursor): see `tools/global-setup/README.md`.
+
 ## Models
 
 The level is the kind of model to fill in later. The same level can still be a separate provider id if you want separate cost.

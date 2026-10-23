@@ -1,0 +1,15 @@
+{
+  "productName": "Acme App",
+  "tagline": "Ship faster with your AI coworkers",
+  "features": [
+    "Brief to plan in one pass",
+    "Deterministic video renders",
+    "Brand-safe motion"
+  ],
+  "cta": "Start free",
+  "accent": "#0F766E",
+  "background": "#0B1220",
+  "text": "#F8FAFC",
+  "logoText": "ACME",
+  "ctaText": "#F8FAFC"
+}

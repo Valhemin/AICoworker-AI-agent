@@ -24,6 +24,9 @@ Working code in that repo. `tester` PASS if there are acceptance criteria or a s
 - Still ambiguous, multiple parts: spawn `architect`. Architect does not call `designer`.
 - Has a UI: call `follow-design` with the provided design. No design provided: follow existing components in the repo.
 - Publicly accessible page: call `web-seo`. If SEO copy is already available, use it.
+- Web entry point, API, session, upload, or payment: call `web-security-assurance` before the slice is done.
+- Website or desktop app that collects personal data, sells, or targets Vietnam or a global market: call `product-legal-compliance`. Ship the in-product pages or functions. List OWNER ACTION. Do not claim certification.
+- Personal data stored: call `data-privacy-compliance` and `consent-and-erasure`. Export and delete must hit the server. Uninstalling the desktop app is not deletion.
 - After coding: spawn `tester` if there are acceptance criteria or a screen. FAIL: spawn `debug` with the test report, then `tester` reruns.
 
 Do not spawn `ceo`, `developer-work`, `designer`, `marketer`, `browser`, `office`, or `application`. Spawning `rea` is allowed.

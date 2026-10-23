@@ -38,7 +38,12 @@ Việc lớn hơn:
 - `marketer`: sản phẩm mới thì `brand-profile` trước, rồi `audience-channel`, rồi `launch-sprint`. Sau launch thì `content-calendar` cho bốn bài tiếp theo. Đối thủ thay đổi thì `competitor-watch`. Không đăng, không trả tiền, không đổi giá. Không bán.
 - `sales`: chuẩn bị và phân tích bán hàng 1-1. Bắt đầu sản phẩm mới thì `sales-context` → `value-prop` → `objection-handling`. Trước mỗi buổi gặp thì `discovery-prep`. Sau buổi gặp thì `deal-brief`. Gần close thì `deal-close`. Sau khi xong deal thì `win-loss`. Không liên hệ khách hàng. Không gửi email. Không đổi giá.
 - `browser`, `office`, `application`: việc vận hành đúng hàng đợi. Không viết plan code.
-- `creator`: xưởng media. Show mới đi `creator-story` rồi hình rồi `opencreator-handoff`. Video local hoặc các link trong task đi thẳng `creator-publish`. Có link thì tải hết trước. Thiếu `yt-dlp` thì xin duyệt rồi mới cài. Chưa render.
+- `creator`: xưởng media tổng hợp. Show mới đi `creator-story` rồi hình rồi `creator-publish`. Nhiệm vụ re-up/dịch video nước ngoài giao cho `creator-reup`.
+- `creator-publish`: đóng gói và ráp video AI nguyên bản (`ai-video-assembly`, `voiceover-tts-sync`), tạo cover, hậu kỳ. Chưa render trả phí.
+- `creator-reup`: chuyên tải, bóc phụ đề, dịch thuật, lồng tiếng video nước ngoài (`opencreator-*`), bắt buộc chạy `video-transform-dedup` (băm cảnh, chèn B-roll, lật/zoom, thay nhạc nền ducking) để chống phạt trùng lặp thuật toán. Chưa đăng.
+- `finance`: quản trị dòng tiền, dự báo runway, theo dõi burn-rate hàng tháng (API, server, saas), lập đối soát thanh toán hợp đồng và hóa đơn. Không chuyển khoản ngân hàng.
+- `security`: kiểm toán an ninh đám mây, rà soát rò rỉ secret/API key, đánh giá lỗ hổng ứng dụng (OWASP, IDOR, auth bypass) trước khi release. Không tấn công quét mạng bên ngoài.
+- `devops`: thiết lập CI/CD GitHub Actions, đóng gói Docker, cấu hình cloud/VPS/domain, và tự động hóa sao lưu phục hồi cơ sở dữ liệu (DR). Không chạy lệnh deploy live khi chưa có kế hoạch rollback.
 - `developer-personal`: viết MCP server bằng `mcp-server-build`, gắn vào OpenClaw bằng `mcp-connect`. Task MCP của repo công ty do `implement` làm hai skill đó.
 
 Agent được phép bác một chi tiết trong yêu cầu khi chi tiết đó làm hỏng đầu ra. Phải nêu cách làm thay thế và làm cách đó. Không được bỏ cả yêu cầu.
@@ -67,12 +72,16 @@ Chỗ trống model nằm trong `openclaw.agents.example.json5`. Điền id prov
 | Thị trường | `creator-research` | rẻ hơn một bậc | Câu hỏi cần nguồn | Fact, tách khỏi suy đoán |
 | Thị trường | `creator-story` | mạnh về chữ | Brief | Kịch bản |
 | Thị trường | `creator-visual` | mạnh về hình | `BRAND.md` | Một ảnh và một video ngắn |
-| Thị trường | `creator-publish` | rẻ hơn một bậc | Kịch bản đã có | `produce.md` hoặc gói đăng. Chưa render |
+| Thị trường | `creator-publish` | rẻ hơn một bậc | Kịch bản + assets đã có | Video AI ráp hoàn chỉnh (`assembly-plan.md`), gói đăng |
+| Thị trường | `creator-reup` | rẻ hơn một bậc | Link video ngoại, ngôn ngữ cần dịch | Video đã dub tiếng, phụ đề, biến đổi cảnh chống trùng |
 | Vận hành | `browser` | rẻ | Việc cần mở web | File hoặc tóm tắt trong hàng đợi |
 | Vận hành | `office` | rẻ | Word, Excel, PDF | File trong hàng đợi |
 | Vận hành | `application` | rẻ | Workflow app desktop | File trong hàng đợi |
+| Tài chính | `finance` | mạnh, cẩn trọng | Chi phí định kỳ, hóa đơn, deal won | `cashflow-runway.md`, `billing-tracker.md` |
+| An ninh | `security` | mạnh, zero-trust | Repo, config cloud, API endpoints | `secrets-audit.md`, `appsec-review.md` (PASS/FAIL) |
+| Hạ tầng | `devops` | tự động, chuẩn IaC | Repo đã test PASS, manifest | `ci.yml`, `deploy-plan.md`, `backup-dr-plan.md` |
 
-Chưa có phòng nhân sự, kế toán, hay sales. Bạn tự bán. Doanh thu sẽ do hệ thống quản lí riêng, không nằm trong các agent này.
+Đã bổ sung đầy đủ phòng tài chính (`finance`), an ninh (`security`), hạ tầng triển khai (`devops`), và bán hàng (`sales`). Chưa có phòng nhân sự nội bộ (HR). Doanh thu thực nhận qua ngân hàng người dùng tự kiểm soát.
 
 ## Thư mục dự án
 

@@ -1,0 +1,24 @@
+{
+  "title": "Create your first project",
+  "steps": [
+    {
+      "title": "Open Projects",
+      "body": "From the sidebar, choose Projects.",
+      "screenshot": "assets/step-1.png"
+    },
+    {
+      "title": "Click New",
+      "body": "Name the project and pick a template.",
+      "screenshot": "assets/step-2.png"
+    },
+    {
+      "title": "Invite your agent",
+      "body": "Attach the brief and run the first skill.",
+      "screenshot": "assets/step-3.png"
+    }
+  ],
+  "accent": "#2563EB",
+  "background": "#F8FAFC",
+  "text": "#0F172A",
+  "secondsPerStep": 4
+}

@@ -1,0 +1,13 @@
+{
+  "videoSrc": "assets/talking-head.mp4",
+  "captions": [
+    { "text": "Replace", "startMs": 0, "endMs": 400 },
+    { "text": "with", "startMs": 400, "endMs": 700 },
+    { "text": "real", "startMs": 700, "endMs": 1100 },
+    { "text": "transcript", "startMs": 1100, "endMs": 1800 }
+  ],
+  "accent": "#F59E0B",
+  "text": "#FFFFFF",
+  "wordsPerPage": 4,
+  "safeBottom": 360
+}

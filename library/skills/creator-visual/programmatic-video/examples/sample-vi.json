@@ -1,0 +1,11 @@
+{
+  "meta": { "title": "Acme demo", "lang": "vi", "aspect": "9:16", "captions": true },
+  "brand": { "accent": "#0F766E", "background": "#0B1220", "text": "#F8FAFC", "track": "#1E293B", "ctaText": "#F8FAFC" },
+  "rights": [],
+  "scenes": [
+    { "type": "title", "title": "Acme", "subtitle": "Làm video nhanh hơn", "narration": "Giới thiệu Acme, ứng dụng giúp bạn làm video nhanh hơn." },
+    { "type": "bullets", "heading": "Ba lợi ích", "items": ["Từ ý tưởng đến kế hoạch một lần", "Dựng bằng code, kết quả ổn định", "Có giọng đọc và phụ đề"], "narration": "Từ ý tưởng đến kế hoạch chỉ trong một lần. Video dựng bằng code nên kết quả luôn ổn định, kèm giọng đọc và phụ đề." },
+    { "type": "chart", "heading": "Đăng ký theo ngày", "unit": "người", "series": [{ "label": "T2", "value": 12 }, { "label": "T3", "value": 18 }, { "label": "T4", "value": 24 }], "narration": "Ví dụ số liệu minh họa, thay bằng dữ liệu thật của bạn." },
+    { "type": "cta", "heading": "Dùng thử ngay hôm nay", "button": "Bắt đầu miễn phí", "narration": "Dùng thử miễn phí ngay hôm nay." }
+  ]
+}

@@ -11,7 +11,7 @@ SKIP: pure read-only UI with no data mutation and no external calls
 
 # Security Threat Model
 
-Run before shipping any feature in the trigger list. Not a full pentest — a structured pre-ship check.
+Run before shipping any feature in the trigger list. Not a full pentest — a structured pre-ship check. For a web or API slice, also run `web-security-assurance` and record evidence per control. Do not add attack payloads here.
 
 ## Step 1 — Identify Trust Boundaries
 

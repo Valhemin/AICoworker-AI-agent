@@ -2,7 +2,7 @@
 
 Công ty nhỏ gồm hai mảng: `giai-phap-so` và `media`. Mục tiêu là có người trả tiền, hoặc dừng ý tưởng trước khi làm. Bạn tự bán. Doanh thu nằm ở hệ thống khác, không nằm ở các agent này.
 
-Chi tiết vận hành: `shared/00_System/OPERATING.md`. File mẫu cấu hình: `openclaw.agents.example.json5`. Combo 9router: `9router.combos.example.json` (snapshot một máy — luôn confirm provider rồi chỉnh). Bảng Model = khuyến nghị đủ gói. Không ghi API key / bot token vào repo.
+Chi tiết vận hành: `shared/00_System/OPERATING.md`. File mẫu cấu hình: `openclaw.agents.example.json5`. Combo 9router: `9router.combos.example.json` (Codex free; Antigravity trả phí nhưng đường IDE chỉ Flash). Bảng Model theo snapshot đó; `cx/gpt-6.1-sol` luôn cuối combo. Không ghi API key / bot token vào repo.
 
 ---
 
@@ -242,13 +242,15 @@ Xong việc thì xóa `draft`, `notes`, `tmp`.
 
 Index skill là danh sách OpenClaw đưa vào phiên chính: tên, một dòng mô tả, đường dẫn. Mỗi agent chỉ thấy skill trong allowlist của mình. Phiên được giao không thấy danh sách, nên task ghi đường dẫn skill.
 
+Dùng skill ở repo khác (Claude, Codex, Antigravity, Cursor): xem `tools/global-setup/README.md`.
+
 File mẫu đúng schema: `openclaw.agents.example.json5`. Model để trống thì agent dùng model mặc định đang cài.
 
 ## Model
 
-Bảng cuối mục này là **khuyến nghị khi đủ gói** (Claude Team + ChatGPT Plus + Cursor + Antigravity). Máy thật gần như luôn thiếu một vài gói — **luôn confirm rồi mới set**.
+Bảng cuối mục này là **gợi ý cho máy hiện tại**: Codex ở tier free; Antigravity có một account trả phí nhưng đường IDE mà 9router gọi chỉ nối được tập model đã test ngày 22/10/2026. Có ChatGPT Plus thì confirm rồi mới đưa `gpt-6.1-sol` lên trước. Chuỗi đủ nằm trong `9router.combos.example.json`.
 
-9router nối provider; cột 1 chạy hằng ngày; hết lượt sang cột sau; hết combo thì Copilot Student Auto, rồi Gemma 4 12B (local) nếu gắn. Combo tên `agent-<id>` (`main` ↔ `agent-ceo`).
+9router nối provider; cột 1 chạy hằng ngày; hết lượt sang cột sau. Slot Codex trong chuỗi là **GPT-6 Luna**. `cx/gpt-6.1-sol` đứng **cuối** mọi combo agent (`(high)` ở `architect`, `debug`, `rea`) — chỉ tới lượt khi các model free phía trước hết. Hết combo thì Copilot Student Auto, rồi Gemma 4 12B (local) nếu gắn. Combo tên `agent-<id>` (`main` ↔ `agent-ceo`).
 
 ### Confirm provider (bắt buộc)
 
@@ -257,13 +259,13 @@ Hỏi người dùng / kiểm tra 9router trước khi tạo hoặc sửa combo:
 | Provider | Có? | Model kỳ vọng khi có |
 |---|---|---|
 | Claude Team (cc/) | | Sonnet 5.5, Haiku 5.5; fallback Sonnet 5 / Haiku 4.5; Opus 5.5 khi Sonnet không đạt |
-| ChatGPT Plus / Codex (cx/) | | GPT-6.1 Sol, GPT-6 Sol, GPT-6 Luna. `6.1 Sol` lỗi → GPT-6 Sol. GPT-5.6- không còn trên đường này |
-| Codex Free / không Plus | | Chỉ **GPT-6 Luna** (không Sol / 6.1 Sol) |
+| ChatGPT Plus / Codex (cx/) | | Có Plus: đưa `cx/gpt-6.1-sol` lên trước Luna. `6.1 Sol` lỗi → GPT-6 Sol. GPT-5.6- không còn trên đường này |
+| Codex Free / không Plus | | Slot chạy: **GPT-6 Luna**. Giữ `cx/gpt-6.1-sol` ở **cuối** priority combo, không đưa lên đầu |
 | Cursor Pro (cu/) | | Grok 4.7 (code khó), Grok 4.6, Composer 2.5 (rẻ) |
-| Antigravity (ag/) | | Gemini 4 Argon, Gemini 3.8 Flash (Argon app/CLI). Muse Spark chỉ khi balance quà — không Contributor |
+| Antigravity (ag/) | Có 1 account trả phí | Test call 22/10/2026, HTTP 200: `ag/gemini-3.8-flash` và `-low` / `-medium` / `-high` (upstream `gemini-3.8-flash-n`), `ag/gpt-oss-120b-medium`, `ag/claude-opus-4-6-thinking`, `ag/claude-sonnet-4-6`. Ba id cuối docs ghi gỡ 2/11/2026, để ngoài chuỗi hằng ngày. `NOT_FOUND` (9router bọc 503, khóa ~2 phút): `ag/claude-sonnet-5-5`, `ag/claude-opus-5-5` (kể cả `-high`), `ag/gemini-4-argon-low` / `-medium` / `-high`, `ag/gemini-3.7-flash-low`, `ag/gemini-3.6-flash-low`, `ag/gemini-3.1-pro-low`. Argon chỉ có trên App/CLI/extension, không đi đường IDE mà 9router gọi. Docs ghi Sonnet/Opus 5.5 cho Pro trả phí, nhưng đường này vẫn `NOT_FOUND`. Gemini 3.7 / 3.6 / 3.1 Pro là Enterprise |
 | Gemma local / Copilot Student | | Chỉ cuối chuỗi hoặc agent rẻ khi hết lượt gói trả phí |
 
-`9router.combos.example.json` = snapshot **một** máy đã confirm (ví dụ không Plus → Luna). Máy khác gói khác → chỉnh lại, không copy nguyên.
+`9router.combos.example.json` = snapshot máy này: Codex free (Luna trong chuỗi, `gpt-6.1-sol` cuối), Antigravity chỉ `gemini-3.8-flash`. Có Plus hoặc khi đường IDE mở Argon / Claude 5.5 thì chỉnh lại, không copy nguyên.
 
 ### Chỉnh combo theo gói đang có
 
@@ -271,11 +273,12 @@ Lấy bảng khuyến nghị bên dưới, rồi áp dụng (có thể kết h�
 
 | Thiếu / hạn chế | Cách chỉnh |
 |---|---|
-| Không Claude | Ô Sonnet/Haiku → Gemini Flash hoặc Argon / Grok / GPT (theo gói còn) |
-| Không Plus (chỉ Free GPT) | Mọi GPT-6.1 Sol / GPT-6 Sol → **GPT-6 Luna** |
+| Không Claude | Ô Sonnet/Haiku → Gemini 3.8 Flash / Grok / GPT (theo gói còn) |
+| Không Plus (chỉ Free GPT) | Slot GPT trong chuỗi = **GPT-6 Luna**. Giữ `cx/gpt-6.1-sol` ở cuối combo, không xóa |
 | Không GPT/Codex | Ô GPT → Claude hoặc Gemini / Grok cùng vai trò |
 | Không Cursor | Ô Grok / Composer → Claude Sonnet/Haiku hoặc Gemini Flash |
-| Không Antigravity | Ô Argon / Flash → Claude hoặc GPT cùng vai trò (designer/visual ưu tiên model thị giác còn lại) |
+| Không Antigravity | Ô Gemini 3.8 Flash → Claude hoặc GPT cùng vai trò (designer/visual ưu tiên model thị giác còn lại) |
+| Antigravity trả phí, gọi qua 9router | Giữ Gemini 3.8 Flash. Không đổi sang Argon hay `ag/claude-*-5-5` cho đến khi test call trả 200 |
 | Chỉ còn local / Student | Agent nặng tạm dừng hoặc xếp Gemma/Auto cuối; đừng để primary |
 
 Sau khi chỉnh: tạo/cập nhật combo 9router, sync OpenClaw, **set lại** `contextWindow` 200k/256k.
@@ -286,30 +289,32 @@ Sau khi chỉnh: tạo/cập nhật combo 9router, sync OpenClaw, **set lại** 
 2. Cập nhật combo 9router (+ file example nếu muốn giữ snapshot máy này).
 3. Sync OpenClaw → set lại `contextWindow`.
 
+Ba cột dưới là ba model đầu. Phần còn lại của chuỗi, và `cx/gpt-6.1-sol` ở cuối, nằm trong file example.
+
 | Agent | Chạy mặc định | Fallback 1 | Fallback 2 |
 |---|---|---|---|
-| `main` (CEO) | Claude Sonnet 5.5 | GPT-6 Sol | Claude Sonnet 5 |
-| `analyst` | GPT-6 Sol | Gemini 3.8 Flash | Claude Sonnet 5 |
-| `architect` | Claude Sonnet 5.5 | Grok 4.7 | GPT-6.1 Sol |
-| `designer` | Gemini 4 Argon | Gemini 3.8 Flash | Claude Sonnet 5.5 |
-| `implement` | Grok 4.7 | Claude Sonnet 5.5 | GPT-6.1 Sol |
-| `reviewer` | Claude Sonnet 5.5 | GPT-6 Sol | Grok 4.6 |
-| `debug` | Claude Sonnet 5.5 | Grok 4.7 | GPT-6.1 Sol |
-| `rea` | Claude Sonnet 5.5 | GPT-6 Sol | Gemini 3.8 Flash |
-| `tester` | Composer 2.5 | Gemini 3.8 Flash | GPT-6 Luna |
-| `developer-work` | Claude Haiku 5.5 | Gemini 3.8 Flash | GPT-6 Luna |
-| `developer-personal` | GPT-6.1 Sol | Grok 4.6 | Composer 2.5 |
-| `marketer` | Claude Sonnet 5.5 | GPT-6 Sol | Gemini 3.8 Flash |
-| `sales` | Claude Sonnet 5.5 | GPT-6 Sol | Gemini 3.8 Flash |
-| `creator` | Claude Sonnet 5.5 | GPT-6 Sol | Claude Sonnet 5 |
-| `creator-story` | Claude Sonnet 5.5 | GPT-6 Sol | GPT-6 Luna |
-| `creator-visual` | Gemini 4 Argon | Gemini 3.8 Flash | Claude Sonnet 5.5 |
-| `creator-research` | Gemini 3.8 Flash | GPT-6 Luna | Claude Haiku 5.5 |
+| `main` (CEO) | Claude Sonnet 5.5 | Gemini 3.8 Flash | Grok 4.7 |
+| `analyst` | Claude Sonnet 5.5 | Gemini 3.8 Flash | Grok 4.7 |
+| `architect` | Claude Sonnet 5.5 | Gemini 3.8 Flash | Grok 4.7 |
+| `designer` | Gemini 3.8 Flash | Claude Sonnet 5.5 | Grok 4.7 |
+| `implement` | Grok 4.7 | Claude Sonnet 5.5 | Gemini 3.8 Flash |
+| `reviewer` | Claude Sonnet 5.5 | Gemini 3.8 Flash | Grok 4.7 |
+| `debug` | Claude Sonnet 5.5 | Gemini 3.8 Flash | Grok 4.7 |
+| `rea` | Claude Sonnet 5.5 | Gemini 3.8 Flash | Grok 4.7 |
+| `tester` | Composer 2.5 | Claude Haiku 5.5 | GPT-6 Luna |
+| `developer-work` | Claude Haiku 5.5 | GPT-6 Luna | Gemini 3.8 Flash |
+| `developer-personal` | Claude Sonnet 5.5 | Gemini 3.8 Flash | Grok 4.7 |
+| `marketer` | Claude Sonnet 5.5 | Gemini 3.8 Flash | Grok 4.7 |
+| `sales` | Claude Sonnet 5.5 | Gemini 3.8 Flash | Grok 4.7 |
+| `creator` | Claude Sonnet 5.5 | Gemini 3.8 Flash | Grok 4.7 |
+| `creator-story` | Claude Sonnet 5.5 | Gemini 3.8 Flash | Grok 4.7 |
+| `creator-visual` | Gemini 3.8 Flash | Claude Sonnet 5.5 | Grok 4.7 |
+| `creator-research` | Gemini 3.8 Flash | Claude Haiku 5.5 | GPT-6 Luna |
 | `creator-publish` | Claude Haiku 5.5 | GPT-6 Luna | Gemini 3.8 Flash |
-| `support` | Claude Haiku 5.5 | Gemini 3.8 Flash | GPT-6 Luna |
+| `support` | Claude Haiku 5.5 | GPT-6 Luna | Gemini 3.8 Flash |
 | `browser` | Gemini 3.8 Flash | Claude Haiku 5.5 | GPT-6 Luna |
-| `office` | GPT-6 Luna | Claude Haiku 5.5 | Gemma 4 12B |
-| `application` | Claude Haiku 5.5 | Gemini 3.8 Flash | Gemma 4 12B |
+| `office` | GPT-6 Luna | Claude Haiku 5.5 | Gemini 3.8 Flash |
+| `application` | Claude Haiku 5.5 | GPT-6 Luna | Gemini 3.8 Flash |
 
 ## Thư mục dự án
 
